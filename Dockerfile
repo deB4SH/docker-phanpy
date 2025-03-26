@@ -1,10 +1,12 @@
-ARG PHANPY_VERSION="2025.03.22.85d964f"
 ARG REPOSITORY="docker.io"
 FROM ${REPOSITORY}/nginxinc/nginx-unprivileged:1.27.4-alpine
+ARG PHANPY_VERSION="2025.03.22.85d964f"
 WORKDIR /usr/share/nginx/html
-#clean content of workdir
+# install wget and clean clean content of workdir
+USER root
+RUN apk add wget
 RUN rm -f ./*
-#download latest
-RUN apk add wget \
-    && wget -O /tmp/phanpy.tar.gz https://github.com/cheeaun/phanpy/releases/download/${PHANPY_VERSION}/phanpy-dist.tar.gz \
-    && tar -xvzf /tmp/phanpy.tar.gz -C ./
+RUN wget -O /tmp/phanpy.tar.gz https://github.com/cheeaun/phanpy/releases/download/${PHANPY_VERSION}/phanpy-dist.tar.gz
+RUN tar -xvzf /tmp/phanpy.tar.gz -C ./
+#switch back to unpriv user
+USER nginx
