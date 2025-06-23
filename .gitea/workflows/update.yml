@@ -11,7 +11,7 @@ jobs:
       DOCKER_ORG: hotbird.docker.nexus.macslabs.de/docker
     if: github.ref == 'refs/heads/dev'
     container:
-      image: hotbird.docker.nexus.macslabs.de/docker/ci-helm-image:1d2426f
+      image: hotbird.docker.nexus.macslabs.de/docker/ci-helm-image:d14c3d8
     steps:
       - name: Checkout
         uses: actions/checkout@v4
