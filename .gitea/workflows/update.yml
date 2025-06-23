@@ -25,3 +25,4 @@ jobs:
           if [[ "$curr" != "$latest" ]]; then
             sed -i 's/\(ARG PHANPY_VERSION="\)[^"]*"\1'"$latest"'"/' Dockerfile
           fi
+          cat Dockerfile
