@@ -1,0 +1,27 @@
+name: update
+
+on:
+  push:
+    branches:
+      - dev
+jobs:
+  build-main:
+    runs-on: ubuntu-latest
+    container:
+      image: catthehacker/ubuntu:act-latest
+    env:
+      DOCKER_ORG: hotbird.docker.nexus.macslabs.de/docker
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # all history for all branches and tags
+      - name: Update Phanpy
+        id: update
+        run: |
+          curr=$(cat Dockerfile | grep PHANPY_VERSION | head -n1 | awk -F'=' '{print $2}' | tr -d '"')
+          latest=$(curl --silent "https://api.github.com/repos/cheeaun/phanpy/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+          if [[ "$curr" != "$latest"]]; then
+            sed -i 's/\(ARG PHANPY_VERSION="\)[^"]*"\1'"$latest"'"/' Dockerfile
+          fi
