@@ -34,7 +34,7 @@ jobs:
           # add to git and commit
           git config user.email service.updater@home.lab
           git config user.name Service Updater
-          git add Chart.yaml
+          git add Dockerfile
           if git status --porcelain | grep .; then
               git commit -am 'updated dependency'
               git push || true
