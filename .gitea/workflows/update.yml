@@ -7,11 +7,11 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
-    container:
-      image: catthehacker/ubuntu:act-latest
     env:
       DOCKER_ORG: hotbird.docker.nexus.macslabs.de/docker
     if: github.ref == 'refs/heads/dev'
+    container:
+      image: hotbird.docker.nexus.macslabs.de/docker/ci-helm-image:1d2426f
     steps:
       - name: Checkout
         uses: actions/checkout@v4
