@@ -5,13 +5,13 @@ on:
     branches:
       - dev
 jobs:
-  build-main:
+  update:
     runs-on: ubuntu-latest
     container:
       image: catthehacker/ubuntu:act-latest
     env:
       DOCKER_ORG: hotbird.docker.nexus.macslabs.de/docker
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/dev'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
