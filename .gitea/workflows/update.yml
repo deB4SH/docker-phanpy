@@ -22,6 +22,6 @@ jobs:
         run: |
           curr=$(cat Dockerfile | grep PHANPY_VERSION | head -n1 | awk -F'=' '{print $2}' | tr -d '"')
           latest=$(curl --silent "https://api.github.com/repos/cheeaun/phanpy/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-          if [[ "$curr" != "$latest"]]; then
+          if [[ "$curr" != "$latest" ]]; then
             sed -i 's/\(ARG PHANPY_VERSION="\)[^"]*"\1'"$latest"'"/' Dockerfile
           fi
