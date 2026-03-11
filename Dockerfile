@@ -1,6 +1,6 @@
 ARG REPOSITORY="docker.io"
 FROM ${REPOSITORY}/nginxinc/nginx-unprivileged:1.27.4-alpine
-ARG PHANPY_VERSION="2026.01.31.8b98d5a"
+ARG PHANPY_VERSION="2026.02.24.48b2cf7"
 WORKDIR /usr/share/nginx/html
 # install components, and clean up
 USER root
